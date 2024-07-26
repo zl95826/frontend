@@ -2,39 +2,60 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState, useRef } from "react";
-
+import Timer from "./components/Timer";
+interface DataType {
+  id: number;
+  name: string;
+  [key: string]: unknown;
+}
 function App() {
+  const [data, setData] = useState<DataType[]>([]);
+  const [users, setUsers] = useState<DataType[]>([]);
   useEffect(() => {
-    function animatedFun(time: number): void {
-      if (previousTimeRef.current !== null) {
-        const elapse = time - previousTimeRef.current;
-        setTime((pre) => pre + elapse);
-        // setTime(elapse);
-      }
-      previousTimeRef.current = time;
-      timeRef.current = requestAnimationFrame(animatedFun);
-    }
-    //const func = (): void => {};
-
-    timeRef.current = requestAnimationFrame(animatedFun);
+    let ignore: boolean = false;
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((val) => {
+        if (!ignore) setData(val);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     return () => {
-      if (timeRef.current) cancelAnimationFrame(timeRef.current);
+      ignore = true;
     };
   }, []);
-  const timeFormat = (time: number): string => {
-    const millisecondsLeft = time % 1000;
-    const totalSeconds = Math.floor(time / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const mintues = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = Math.floor(totalSeconds % 60);
-    return `${hours} : ${mintues < 10 ? "0" + mintues : mintues}: ${
-      seconds < 10 ? "0" + seconds : seconds
-    } `;
-  };
-  const [time, setTime] = useState<number>(0);
-  const timeRef = useRef<number | null>(null);
-  const previousTimeRef = useRef<number | null>(null);
-  return <div className="App">Timer: {timeFormat(time)}</div>;
+  useEffect(() => {
+    let ignore = false;
+    const fetchFunc = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        const value = await response.json();
+        if (!ignore) setUsers(value);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchFunc();
+    return () => {
+      ignore = true;
+    };
+  }, []);
+  console.log(data, users);
+  return (
+    <div className="App">
+      {/* Timer: <Timer /> */}
+      {data.map((ele) => (
+        <p key={ele.id}>{ele.name}</p>
+      ))}
+      <hr />
+      {users.map((ele) => (
+        <p key={ele.id}>{ele.name}</p>
+      ))}
+    </div>
+  );
 }
 
 export default App;
