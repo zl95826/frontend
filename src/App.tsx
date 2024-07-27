@@ -29,9 +29,7 @@ function App() {
     let ignore = false;
     const fetchFunc = async () => {
       try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
+        const response = await fetch("http://localhost:5000/");
         const value = await response.json();
         if (!ignore) setUsers(value);
       } catch (error) {
@@ -51,6 +49,7 @@ function App() {
         <p key={ele.id}>{ele.name}</p>
       ))}
       <hr />
+      <p>The following data from my server:</p>
       {users.map((ele) => (
         <p key={ele.id}>{ele.name}</p>
       ))}
