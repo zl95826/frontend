@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState, useRef } from "react";
 import Timer from "./components/Timer";
+import Tic from "./components/Tic";
 interface DataType {
   id: number;
   name: string;
@@ -53,6 +54,7 @@ function App() {
       {users.map((ele) => (
         <p key={ele.id}>{ele.name}</p>
       ))}
+      <Tic />
     </div>
   );
 }
