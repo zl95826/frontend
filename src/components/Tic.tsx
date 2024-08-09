@@ -18,16 +18,12 @@ function Board({
   squares: string[] | null[];
   onPlay: (arr: (string | null)[]) => void;
 }) {
-  //   const [squares, setSquares] = useState(Array(9).fill(null));
-  //   const [xIsNext, setXIsNext] = useState(true);
   const handleClick = (i: number) => {
     if (squares[i]) {
       return;
     }
     const nextSquares = squares.slice(); //creates a copy of the squares array (nextSquares) with the JavaScript slice() Array method
     nextSquares[i] = xIsNext ? "X" : "O";
-    // setSquares(nextSquares);
-    // setXIsNext((pre) => !pre);
     onPlay(nextSquares);
   };
   return (
