@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -6,7 +10,16 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.square {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+.board-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

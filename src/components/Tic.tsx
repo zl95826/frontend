@@ -6,7 +6,11 @@ function Square({
   value: string | null;
   onSquareClick: () => void;
 }) {
-  return <button onClick={onSquareClick}>{value}</button>;
+  return (
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
+  );
 }
 
 function Board({
@@ -19,7 +23,8 @@ function Board({
   onPlay: (arr: (string | null)[]) => void;
 }) {
   const handleClick = (i: number) => {
-    if (squares[i]) {
+    const winner = calculateWinner(squares);
+    if (squares[i] || winner) {
       return;
     }
     const nextSquares = squares.slice(); //creates a copy of the squares array (nextSquares) with the JavaScript slice() Array method
@@ -55,9 +60,30 @@ export default function Game() {
     setXIsNext((pre) => !pre);
     setHistory((pre) => [...pre, nextSquares]);
   };
+
   return (
     <>
       <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
     </>
   );
+}
+
+function calculateWinner(squares: string[] | null[]) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] === squares[b] && squares[b] === squares[c] && squares[a]) {
+      return squares[a];
+    }
+  }
+  return null;
 }
