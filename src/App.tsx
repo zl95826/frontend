@@ -4,6 +4,7 @@ import "./App.css";
 import { useEffect, useState, useRef } from "react";
 import Timer from "./components/Timer";
 import Tic from "./components/Tic";
+import Calendar from "./components/Calendar";
 interface DataType {
   id: number;
   name: string;
@@ -55,6 +56,7 @@ function App() {
       {!users.length && <p>No Server Connection</p>}
       {users.length && users.map((ele) => <p key={ele.id}>{ele.name}</p>)}
       <Tic />
+      <Calendar />
     </div>
   );
 }
