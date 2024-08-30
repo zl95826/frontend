@@ -35,6 +35,7 @@ function App() {
         if (!ignore) setUsers(value);
       } catch (error) {
         console.error(error);
+        setUsers([]);
       }
     };
     fetchFunc();
@@ -51,9 +52,8 @@ function App() {
       ))}
       <hr />
       <p>The following data from my server:</p>
-      {users.map((ele) => (
-        <p key={ele.id}>{ele.name}</p>
-      ))}
+      {!users.length && <p>No Server Connection</p>}
+      {users.length && users.map((ele) => <p key={ele.id}>{ele.name}</p>)}
       <Tic />
     </div>
   );
