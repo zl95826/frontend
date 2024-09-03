@@ -26,17 +26,32 @@
   flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
-  gap: 10px;
+
   background: #61dafb;
+  justify-content: flex-start;
+}
+/* .calendar div {
+  margin: 5px;
+} */
+
+.calendar div {
+  gap: 10px;
 }
 .calendar.smaller div {
   flex: 1 1 calc(20% - 10px);
-  height: 100vh;
+  height: 30vh;
   border: 1px solid black;
 }
 .calendar.greater div {
   flex-basis: calc(20% - 10px);
-  height: 100vh;
+  height: 30vh;
+  border: 1px solid black;
+}
+/* .calendar div:nth-child(5n) {
+  margin-right: 0;
+} */
+.calendar .square {
+  flex: 1 1 calc(100% / 7);
   border: 1px solid black;
 }
 @media (prefers-reduced-motion: no-preference) {
