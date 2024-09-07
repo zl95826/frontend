@@ -5,9 +5,11 @@ import { useEffect, useState, useRef } from "react";
 import Timer from "./components/Timer";
 import Tic from "./components/Tic";
 import Box from "./components/Calendar";
-interface DataType {
+import Pagination from "./components/Pagination";
+export interface DataType {
   id: number;
   name: string;
+  email: string;
   [key: string]: unknown;
 }
 function App() {
@@ -51,6 +53,8 @@ function App() {
       {data.map((ele) => (
         <p key={ele.id}>{ele.name}</p>
       ))}
+      <hr />
+      <Pagination data={data} />
       <hr />
       <p>The following data from my server:</p>
       {!users.length && <p>No Server Connection</p>}

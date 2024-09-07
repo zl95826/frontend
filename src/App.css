@@ -33,17 +33,17 @@
 /* .calendar div {
   margin: 5px;
 } */
-
+/* 
 .calendar div {
   gap: 10px;
-}
+} */
 .calendar.smaller div {
   flex: 1 1 calc(20% - 10px);
   height: 30vh;
   border: 1px solid black;
 }
 .calendar.greater div {
-  flex-basis: calc(20% - 10px);
+  flex-basis: calc(100% / 5);
   height: 30vh;
   border: 1px solid black;
 }
